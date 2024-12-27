@@ -5,3 +5,13 @@ function getComputerChoice() {
   return choices[choice];
 }
 
+function getHumanChoice() {
+  let choice = prompt("ROCK, PAPER or SCISSORS ?").toUpperCase();
+
+  if (choice != choices[0] && choice != choices[1] && choice != choices[2]) {
+    console.warn(`${choice} is not a valid answer.`);
+    return getHumanChoice();
+  }
+
+  return choice;
+}

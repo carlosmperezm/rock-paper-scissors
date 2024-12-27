@@ -19,8 +19,6 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-  humanChoice = humanChoice.toUpperCase();
-  computerChoice = computerChoice.toUpperCase();
   // Computer wins
   if (humanChoice == 'ROCK' && computerChoice == 'PAPER') {
     computerScore++;
@@ -51,4 +49,14 @@ function playRound(humanChoice, computerChoice) {
   else {
     return console.log('TIE')
   }
+}
+
+function playGame() {
+  for (let i = 0; i < 5; i++) {
+    playRound(getHumanChoice(), getComputerChoice());
+  }
+  console.log(`The total score is: 
+    computer score: ${computerScore}.
+    your score: ${humanScore}.
+    `)
 }

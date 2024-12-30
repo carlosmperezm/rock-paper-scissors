@@ -1,3 +1,8 @@
+const h2 = document.querySelector(".info h2");
+const rockButton = document.querySelector("#rock-btn");
+const paperButton = document.querySelector("#paper-btn");
+const scissorsButton = document.querySelector("#scissors-btn");
+
 const choices = ['ROCK', 'PAPER', 'SCISSORS'];
 let computerScore = 0;
 let humanScore = 0;

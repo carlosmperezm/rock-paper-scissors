@@ -1,8 +1,5 @@
 const infoSection = document.querySelector(".info");
 const h2 = document.querySelector(".info h2");
-// const rockButton = document.querySelector("#rock-btn");
-// const paperButton = document.querySelector("#paper-btn");
-// const scissorsButton = document.querySelector("#scissors-btn");
 const buttonsSection = document.querySelector(".buttons")
 const p = document.createElement("p");
 
@@ -65,7 +62,7 @@ buttonsSection.addEventListener("click", (evnt) => {
     let computerChoice = getComputerChoice();
     p.textContent = `Computer has chosen: ${computerChoice}.
       and you have chosen: ${humanChoice}. 
-      ${playRound(humanChoice, getComputerChoice())} `
+      ${playRound(humanChoice, computerChoice)} `
   }
 
   infoSection.appendChild(p);

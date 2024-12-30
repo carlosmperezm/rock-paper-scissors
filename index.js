@@ -2,66 +2,62 @@ const h2 = document.querySelector(".info h2");
 const rockButton = document.querySelector("#rock-btn");
 const paperButton = document.querySelector("#paper-btn");
 const scissorsButton = document.querySelector("#scissors-btn");
+const buttonsSection = document.querySelector(".buttons")
 
-const choices = ['ROCK', 'PAPER', 'SCISSORS'];
+const choices = ["ROCK", "PAPER", "SCISSORS"];
 let computerScore = 0;
 let humanScore = 0;
+let humanChoice = "";
+
+buttonsSection.addEventListener("click", (evnt) => {
+  humanChoice = evnt.target.textContent.toUpperCase();
+  h2.textContent = playRound(humanChoice, getComputerChoice());
+});
+
 
 function getComputerChoice() {
   let choice = Math.floor(Math.random() * choices.length);
   return choices[choice];
 }
 
-function getHumanChoice() {
-  let choice = prompt("ROCK, PAPER or SCISSORS ?").toUpperCase();
-
-  if (choice != choices[0] && choice != choices[1] && choice != choices[2]) {
-    console.warn(`${choice} is not a valid answer.`);
-    return getHumanChoice();
-  }
-
-  return choice;
-}
-
 function playRound(humanChoice, computerChoice) {
   // Computer wins
   if (humanChoice == 'ROCK' && computerChoice == 'PAPER') {
     computerScore++;
-    return console.log('You lose! Paper beats Rock');
+    return 'You lose! Paper beats Rock';
   }
   if (humanChoice == 'PAPER' && computerChoice == 'SCISSORS') {
     computerScore++;
-    return console.log('You lose! SCISSORS beats Paper');
+    return 'You lose! SCISSORS beats Paper';
   }
   if (humanChoice == 'SCISSORS' && computerChoice == 'ROCK') {
     computerScore++;
-    return console.log('You lose! Rock beats SCISSORS ');
+    return 'You lose! Rock beats SCISSORS ';
   }
 
   // Human wins
   if (humanChoice == 'PAPER' && computerChoice == 'ROCK') {
     humanScore++;
-    return console.log('Computer lose! Paper beats Rock');
+    return 'Computer lose! Paper beats Rock';
   }
   if (humanChoice == 'SCISSORS' && computerChoice == 'PAPER') {
     humanScore++;
-    return console.log('Computer lose! SCISSORS beats PAPER');
+    return 'Computer lose! SCISSORS beats PAPER';
   }
   if (humanChoice == 'ROCK' && computerChoice == 'SCISSORS') {
     humanScore++;
-    return console.log('Computer lose! ROCK beats SCISSORS');
+    return 'Computer lose! ROCK beats SCISSORS';
   }
   else {
-    return console.log('TIE')
+    return 'TIE';
   }
 }
 
 function playGame() {
   for (let i = 0; i < 5; i++) {
-    playRound(getHumanChoice(), getComputerChoice());
+    playRound(humanChoice, getComputerChoice());
   }
-  console.log(`The total score is: 
+  h2.textContent = `The total score is: 
     computer score: ${computerScore}.
-    your score: ${humanScore}.
-    `)
+    your score: ${humanScore}. `
 }

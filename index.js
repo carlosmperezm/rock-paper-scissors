@@ -1,19 +1,15 @@
+const infoSection = document.querySelector(".info");
 const h2 = document.querySelector(".info h2");
-const rockButton = document.querySelector("#rock-btn");
-const paperButton = document.querySelector("#paper-btn");
-const scissorsButton = document.querySelector("#scissors-btn");
+// const rockButton = document.querySelector("#rock-btn");
+// const paperButton = document.querySelector("#paper-btn");
+// const scissorsButton = document.querySelector("#scissors-btn");
 const buttonsSection = document.querySelector(".buttons")
+const p = document.createElement("p");
 
 const choices = ["ROCK", "PAPER", "SCISSORS"];
 let computerScore = 0;
 let humanScore = 0;
 let humanChoice = "";
-
-buttonsSection.addEventListener("click", (evnt) => {
-  humanChoice = evnt.target.textContent.toUpperCase();
-  h2.textContent = playRound(humanChoice, getComputerChoice());
-});
-
 
 function getComputerChoice() {
   let choice = Math.floor(Math.random() * choices.length);
@@ -53,11 +49,27 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    playRound(humanChoice, getComputerChoice());
+buttonsSection.addEventListener("click", (evnt) => {
+  /* 
+    * Instead of adding an event listener to each button, we take advantage of the bubbling feature of the events in JavaScript and catch the event in the parent container.
+    * That so only set one event listener. 
+  */
+
+  if (humanScore >= 5 || computerScore >= 5) {
+    h2.textContent = "Game ended.";
+    p.textContent = `The total score is:\n 
+    computer score: ${computerScore}.\n
+    your score: ${humanScore}.`
+  } else {
+    humanChoice = evnt.target.textContent.toUpperCase();
+    let computerChoice = getComputerChoice();
+    p.textContent = `Computer has chosen: ${computerChoice}.
+      and you have chosen: ${humanChoice}. 
+      ${playRound(humanChoice, getComputerChoice())} `
   }
-  h2.textContent = `The total score is: 
-    computer score: ${computerScore}.
-    your score: ${humanScore}. `
-}
+
+  infoSection.appendChild(p);
+
+});
+
+
